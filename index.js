@@ -54,13 +54,19 @@ function application(expr, env) {
 
 function abstraction(expr, env) {
   var params = expr[1];
+  var paramsLen = params.length;
+
+  function newEnv(args) {
+    var env1 = Object.create(env);
+    for (var i=0; i < paramsLen; i++) {
+      env1[params[i].value] = args[i];
+    }
+    return env1;
+  }
+
   var body = expr.slice(2);
   return function(args) {
-    var env1 = Object.create(env);
-    for (var i=params.length; --i >= 0;) {
-      env1[params[i]] = args[i];
-    }
-    return progn(body, env1);
+    return progn(body, newEnv(args));
   }
 }
 
