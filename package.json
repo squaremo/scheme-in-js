@@ -1,0 +1,14 @@
+{
+  "name": "scheme-in-js",
+  "version": "0.0.0",
+  "description": "Scheme interpreter in JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michael Bridgen <mikeb@squaremobius.net>",
+  "license": "MIT",
+  "dependencies": {
+    "pegjs": ""
+  }
+}
