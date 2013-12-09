@@ -4,10 +4,10 @@
 var interp = require('./');
 var util = require('util');
 
-var result = interp.interpret(process.argv[2], GLOBALS);
-process.stdout.write(util.inspect(result));
-process.stdout.write('\n');
-
 var GLOBALS = {
   '+': function(args) { return args[0] + args[1]; }
 };
+
+var result = interp.interpret(process.argv[2], GLOBALS);
+process.stdout.write(util.inspect(result));
+process.stdout.write('\n');
