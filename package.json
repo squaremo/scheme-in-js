@@ -4,11 +4,12 @@
   "description": "Scheme interpreter in JavaScript",
   "main": "index.js",
   "scripts": {
+    "prepublish": "make",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Michael Bridgen <mikeb@squaremobius.net>",
   "license": "MIT",
-  "dependencies": {
+  "devDependencies": {
     "pegjs": ""
   }
 }

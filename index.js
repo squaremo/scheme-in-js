@@ -9,9 +9,11 @@ function evaluate(expr, env) {
         case 'lambda':
           return abstraction(expr, env);
         case 'quote':
-          return quote(expr);
+          return quote(expr[1]);
         case 'begin':
           return progn(expr, env);
+        case 'if':
+          return alternate(expr, env);
         }
       }
       return application(expr, env);
@@ -42,6 +44,16 @@ function quote(expr) {
 
 function ref(symbol, env) {
   return env[symbol];
+}
+
+function alternate(exprs, env) {
+  var test = exprs[0];
+  var ifTrue = exprs[1];
+  var ifFalse = exprs[2] || [];
+  if (evaluate(test, env))
+    return evaluate(ifTrue, env);
+  else
+    return evaluate(ifFalse, env);
 }
 
 function application(expr, env) {
@@ -78,8 +90,7 @@ function progn(exprs, env) {
   return evaluate(exprs[i], env);
 }
 
-var parser = require('pegjs').buildParser(
-  require('fs').readFileSync('./grammar.pegjs').toString());
+var parser = require('./grammar');
 
 module.exports.parse = parser.parse;
 module.exports.interpret = function(str, env) {
